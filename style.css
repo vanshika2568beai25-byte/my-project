@@ -1,4 +1,3 @@
-style.css
 /* ── CSS VARIABLES ── */
 :root {
     --bg-primary: #0a0a14;
@@ -23,9 +22,7 @@ style.css
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-body);
@@ -38,9 +35,7 @@ body {
 /* ── NAVBAR ── */
 nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -59,9 +54,7 @@ nav {
     letter-spacing: 2px;
 }
 
-#logo span {
-    color: var(--accent);
-}
+#logo span { color: var(--accent); }
 
 nav ul {
     list-style: none;
@@ -131,11 +124,9 @@ nav ul li a.active {
 
 .hero-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 600px; height: 600px;
     background: radial-gradient(circle, rgba(0,255,255,0.08) 0%, transparent 70%);
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     animation: pulse 4s ease-in-out infinite;
@@ -147,8 +138,7 @@ nav ul li a.active {
 }
 
 .grid-overlay {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
         linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
@@ -280,9 +270,7 @@ section h2 {
 }
 
 /* ── FEATURES / CARDS ── */
-#features {
-    text-align: center;
-}
+#features { text-align: center; }
 
 .cards-grid {
     display: grid;
@@ -312,9 +300,7 @@ section h2 {
     transition: var(--transition);
 }
 
-.card:hover::before {
-    transform: scaleX(1);
-}
+.card:hover::before { transform: scaleX(1); }
 
 .card:hover {
     transform: translateY(-8px);
@@ -323,10 +309,7 @@ section h2 {
     box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px var(--accent-dim);
 }
 
-.card-icon {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
+.card-icon { font-size: 2rem; margin-bottom: 15px; }
 
 .card h3 {
     font-family: var(--font-heading);
@@ -353,9 +336,7 @@ footer {
     letter-spacing: 1px;
 }
 
-footer span {
-    color: var(--accent);
-}
+footer span { color: var(--accent); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -374,9 +355,7 @@ footer span {
         gap: 0;
     }
 
-    nav ul.open {
-        display: flex;
-    }
+    nav ul.open { display: flex; }
 
     nav ul li a {
         display: block;
@@ -384,17 +363,10 @@ footer span {
         border-radius: 0;
     }
 
-    #toggleBtn {
-        display: none;
-    }
+    #toggleBtn { display: none; }
+    #hamburger { display: block; }
 
-    #hamburger {
-        display: block;
-    }
-
-    section {
-        padding: 60px 20px;
-    }
+    section { padding: 60px 20px; }
 
     #about {
         border-left: none;
@@ -405,13 +377,6 @@ footer span {
 }
 
 @media (max-width: 480px) {
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #exploreBtn, .btn-outline {
-        width: 100%;
-        max-width: 280px;
-    }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    #exploreBtn, .btn-outline { width: 100%; max-width: 280px; }
 }

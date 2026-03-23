@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ── CONTACT PAGE SPECIFIC ── */
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -16,7 +15,6 @@
             margin-top: 40px;
         }
 
-        /* Left side - info cards */
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -46,9 +44,7 @@
             transition: var(--transition);
         }
 
-        .info-card:hover::before {
-            transform: scaleX(1);
-        }
+        .info-card:hover::before { transform: scaleX(1); }
 
         .info-card:hover {
             border-color: var(--accent);
@@ -75,7 +71,6 @@
         .info-value {
             font-size: 0.95rem;
             color: var(--text-primary);
-            font-weight: 400;
             word-break: break-all;
         }
 
@@ -85,11 +80,8 @@
             transition: var(--transition);
         }
 
-        .info-value a:hover {
-            color: var(--accent);
-        }
+        .info-value a:hover { color: var(--accent); }
 
-        /* Right side - message box (static, no form tag, JS will handle later) */
         .contact-message {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -112,10 +104,7 @@
             margin-bottom: 25px;
         }
 
-        /* Input fields (styled, but not inside <form> — JS will handle submit later) */
-        .input-group {
-            margin-bottom: 18px;
-        }
+        .input-group { margin-bottom: 18px; }
 
         .input-label {
             display: block;
@@ -147,9 +136,7 @@
             box-shadow: 0 0 10px var(--accent-dim);
         }
 
-        .input-field::placeholder {
-            color: var(--text-muted);
-        }
+        .input-field::placeholder { color: var(--text-muted); }
 
         textarea.input-field {
             resize: vertical;
@@ -180,7 +167,6 @@
             transform: translateY(-2px);
         }
 
-        /* Note below the message box */
         .js-note {
             text-align: center;
             color: var(--text-muted);
@@ -189,11 +175,8 @@
             opacity: 0.6;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
+            .contact-wrapper { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -205,14 +188,13 @@
         <ul id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="team.html">Team</a></li>
-            <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
         <button id="toggleBtn">☀ Mode</button>
         <button id="hamburger" aria-label="Toggle menu">&#9776;</button>
     </nav>
 
-    <!-- HERO -->
+    <!-- MINI HERO -->
     <section id="home" style="min-height: 35vh; padding-top: 70px;">
         <div class="hero-glow"></div>
         <div class="grid-overlay"></div>
@@ -227,10 +209,9 @@
     <section id="contact">
         <div class="section-tag">Reach Us</div>
         <h2>Contact Information</h2>
-
         <div class="contact-wrapper">
 
-            <!-- Left: Info Cards -->
+            <!-- Left: Email Cards -->
             <div class="contact-info">
 
                 <div class="info-card">
@@ -293,10 +274,10 @@
 
             </div>
 
-            <!-- Right: Message Box (JS will activate submit later) -->
+            <!-- Right: Message Box -->
             <div class="contact-message">
                 <h3>Send a Message</h3>
-                <p>Fill in the details below. The submit button will be activated when JavaScript is added in Phase 3.</p>
+                <p>Fill in the details below. Submit will be activated in Phase 3 (JavaScript).</p>
 
                 <div class="input-group">
                     <label class="input-label">Your Name</label>
