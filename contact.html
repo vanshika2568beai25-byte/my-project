@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | AI Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── CONTACT PAGE SPECIFIC ── */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* Left side - info cards */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-card:hover {
+            border-color: var(--accent);
+            background: rgba(0,255,255,0.07);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 15px var(--accent-dim);
+        }
+
+        .info-icon {
+            font-size: 1.8rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 400;
+            word-break: break-all;
+        }
+
+        .info-value a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .info-value a:hover {
+            color: var(--accent);
+        }
+
+        /* Right side - message box (static, no form tag, JS will handle later) */
+        .contact-message {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px;
+        }
+
+        .contact-message h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .contact-message p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* Input fields (styled, but not inside <form> — JS will handle submit later) */
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(0,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            background: rgba(0,255,255,0.07);
+            box-shadow: 0 0 10px var(--accent-dim);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.input-field {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .send-btn {
+            width: 100%;
+            background: var(--accent);
+            color: #0a0a14;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 20px var(--accent-glow);
+            margin-top: 5px;
+        }
+
+        .send-btn:hover {
+            background: white;
+            box-shadow: 0 0 35px rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Note below the message box */
+        .js-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 10px;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h2 id="logo">AI<span>Portfolio</span></h2>
+        <ul id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <button id="toggleBtn">☀ Mode</button>
+        <button id="hamburger" aria-label="Toggle menu">&#9776;</button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" style="min-height: 35vh; padding-top: 70px;">
+        <div class="hero-glow"></div>
+        <div class="grid-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-label">Get In Touch</p>
+            <h1 id="mainHeading">Contact <span>Us</span></h1>
+            <p id="subText">Have a question? Reach out to our team anytime.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="section-tag">Reach Us</div>
+        <h2>Contact Information</h2>
+
+        <div class="contact-wrapper">
+
+            <!-- Left: Info Cards -->
+            <div class="contact-info">
+
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <p class="info-label">Team Email</p>
+                        <p class="info-value">
+                            <a href="mailto:yourteam@email.com">yourteam@email.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <p class="info-label">Member 1 Email</p>
+                        <p class="info-value">
+                            <a href="mailto:member1@email.com">member1@email.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <p class="info-label">Member 2 Email</p>
+                        <p class="info-value">
+                            <a href="mailto:member2@email.com">member2@email.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <p class="info-label">Member 3 Email</p>
+                        <p class="info-value">
+                            <a href="mailto:member3@email.com">member3@email.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <p class="info-label">Member 4 Email</p>
+                        <p class="info-value">
+                            <a href="mailto:member4@email.com">member4@email.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🎓</div>
+                    <div>
+                        <p class="info-label">Department</p>
+                        <p class="info-value">CSE — AI / ML · FEE Subject · 2026</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Message Box (JS will activate submit later) -->
+            <div class="contact-message">
+                <h3>Send a Message</h3>
+                <p>Fill in the details below. The submit button will be activated when JavaScript is added in Phase 3.</p>
+
+                <div class="input-group">
+                    <label class="input-label">Your Name</label>
+                    <input type="text" class="input-field" placeholder="Enter your name">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Your Email</label>
+                    <input type="email" class="input-field" placeholder="Enter your email">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Message</label>
+                    <textarea class="input-field" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button class="send-btn">Send Message</button>
+                <p class="js-note">⚡ Full functionality coming in Phase 3 (JavaScript)</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>AI Team Portfolio</span> | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
