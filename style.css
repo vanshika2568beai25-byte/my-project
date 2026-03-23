@@ -380,3 +380,7 @@ footer span { color: var(--accent); }
     .hero-buttons { flex-direction: column; align-items: center; }
     #exploreBtn, .btn-outline { width: 100%; max-width: 280px; }
 }
+a#exploreBtn, a.btn-outline {
+    display: inline-block;
+    text-decoration: none;
+}
