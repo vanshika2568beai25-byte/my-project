@@ -1,4 +1,4 @@
-/* ── CSS VARIABLES ── */
+
 :root {
     --bg-primary: #0a0a14;
     --bg-secondary: #111122;
@@ -15,7 +15,7 @@
     --transition: 0.3s ease;
 }
 
-/* ── RESET ── */
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -32,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ── NAVBAR ── */
+
 nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -109,7 +109,7 @@ nav ul li a.active {
     cursor: pointer;
 }
 
-/* ── HERO ── */
+
 #home {
     position: relative;
     min-height: 100vh;
@@ -232,7 +232,7 @@ nav ul li a.active {
     transform: translateY(-2px);
 }
 
-/* ── SECTIONS ── */
+
 section {
     padding: 90px 40px;
     max-width: 1100px;
@@ -269,7 +269,6 @@ section h2 {
     line-height: 1.8;
 }
 
-/* ── FEATURES / CARDS ── */
 #features { text-align: center; }
 
 .cards-grid {
@@ -338,7 +337,7 @@ footer {
 
 footer span { color: var(--accent); }
 
-/* ── RESPONSIVE ── */
+
 @media (max-width: 768px) {
     nav {
         padding: 0 20px;
