@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +15,13 @@
             gap: 40px;
             margin-top: 40px;
         }
-
+        
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
+        
         .info-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -33,31 +34,35 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .info-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 2px;
             background: var(--accent);
             transform: scaleX(0);
             transition: var(--transition);
         }
-
-        .info-card:hover::before { transform: scaleX(1); }
-
+        
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+        
         .info-card:hover {
             border-color: var(--accent);
-            background: rgba(0,255,255,0.07);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 15px var(--accent-dim);
+            background: rgba(0, 255, 255, 0.07);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-dim);
         }
-
+        
         .info-icon {
             font-size: 1.8rem;
             min-width: 45px;
             text-align: center;
         }
-
+        
         .info-label {
             font-family: var(--font-heading);
             font-size: 0.65rem;
@@ -67,28 +72,30 @@
             margin-bottom: 6px;
             opacity: 0.8;
         }
-
+        
         .info-value {
             font-size: 0.95rem;
             color: var(--text-primary);
             word-break: break-all;
         }
-
+        
         .info-value a {
             color: var(--text-primary);
             text-decoration: none;
             transition: var(--transition);
         }
-
-        .info-value a:hover { color: var(--accent); }
-
+        
+        .info-value a:hover {
+            color: var(--accent);
+        }
+        
         .contact-message {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 35px;
         }
-
+        
         .contact-message h3 {
             font-family: var(--font-heading);
             font-size: 1rem;
@@ -96,16 +103,18 @@
             letter-spacing: 1px;
             margin-bottom: 10px;
         }
-
+        
         .contact-message p {
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.8;
             margin-bottom: 25px;
         }
-
-        .input-group { margin-bottom: 18px; }
-
+        
+        .input-group {
+            margin-bottom: 18px;
+        }
+        
         .input-label {
             display: block;
             font-family: var(--font-heading);
@@ -116,10 +125,10 @@
             margin-bottom: 8px;
             opacity: 0.8;
         }
-
+        
         .input-field {
             width: 100%;
-            background: rgba(0,255,255,0.04);
+            background: rgba(0, 255, 255, 0.04);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 12px 16px;
@@ -129,20 +138,22 @@
             outline: none;
             transition: var(--transition);
         }
-
+        
         .input-field:focus {
             border-color: var(--accent);
-            background: rgba(0,255,255,0.07);
+            background: rgba(0, 255, 255, 0.07);
             box-shadow: 0 0 10px var(--accent-dim);
         }
-
-        .input-field::placeholder { color: var(--text-muted); }
-
+        
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+        
         textarea.input-field {
             resize: vertical;
             min-height: 110px;
         }
-
+        
         .send-btn {
             width: 100%;
             background: var(--accent);
@@ -160,13 +171,13 @@
             box-shadow: 0 0 20px var(--accent-glow);
             margin-top: 5px;
         }
-
+        
         .send-btn:hover {
             background: white;
-            box-shadow: 0 0 35px rgba(255,255,255,0.3);
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
-
+        
         .js-note {
             text-align: center;
             color: var(--text-muted);
@@ -174,27 +185,27 @@
             margin-top: 10px;
             opacity: 0.6;
         }
-
+        
         @media (max-width: 768px) {
-            .contact-wrapper { grid-template-columns: 1fr; }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
     <nav>
         <h2 id="logo">AI<span>Portfolio</span></h2>
         <ul id="navLinks">
             <li><a href="index.html">Home</a></li>
-
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
-        <button id="toggleBtn">☀ Mode</button>
         <button id="hamburger" aria-label="Toggle menu">&#9776;</button>
     </nav>
 
-    <!-- MINI HERO -->
+
     <section id="home" style="min-height: 35vh; padding-top: 70px;">
         <div class="hero-glow"></div>
         <div class="grid-overlay"></div>
@@ -205,13 +216,10 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact">
-        <div class="section-tag">Reach Us</div>
         <h2>Contact Information</h2>
         <div class="contact-wrapper">
 
-            <!-- Left: Email Cards -->
             <div class="contact-info">
 
                 <div class="info-card">
@@ -274,7 +282,6 @@
 
             </div>
 
-            <!-- Right: Message Box -->
             <div class="contact-message">
                 <h3>Send a Message</h3>
                 <p>Fill in the details below. Submit will be activated in Phase 3 (JavaScript).</p>
@@ -295,16 +302,17 @@
                 </div>
 
                 <button class="send-btn">Send Message</button>
-                <p class="js-note">⚡ Full functionality coming in Phase 3 (JavaScript)</p>
+                <p class="js-note">[Full functionality coming soon]</p>
             </div>
 
         </div>
     </section>
 
-    <!-- FOOTER -->
+
     <footer>
-        <p>© 2026 <span>AI Team Portfolio</span> | All Rights Reserved</p>
+        <p>©️ 2026 <span>AI Team Portfolio</span> | All Rights Reserved</p>
     </footer>
 
 </body>
+
 </html>
