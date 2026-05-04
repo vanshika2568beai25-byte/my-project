@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Generator | AI Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── FORM ── */
+        .portfolio-form {
+            max-width: 750px;
+            margin: 40px auto 0;
+        }
+
+        .form-group { margin-bottom: 22px; }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(0,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            background: rgba(0,255,255,0.07);
+            box-shadow: 0 0 10px var(--accent-dim);
+        }
+
+        .form-input::placeholder { color: var(--text-muted); }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        /* ── TEMPLATE SELECTOR ── */
+        .template-section {
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        .template-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .p-template-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .p-template-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-dim);
+        }
+
+        .p-template-card.selected::before {
+            content: '✓';
+            position: absolute;
+            top: 8px; right: 12px;
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        /* Template previews */
+        .p-template-card.ai-dark { background: rgba(0,255,255,0.04); }
+        .p-template-card.ai-dark .t-preview {
+            background: #0a0a14;
+            height: 80px; border-radius: 6px; margin-bottom: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+        .p-template-card.ai-dark .t-line1 { width:60%; height:8px; background:#00ffff; border-radius:4px; box-shadow:0 0 8px rgba(0,255,255,0.5); }
+        .p-template-card.ai-dark .t-line2 { width:40%; height:5px; background:rgba(0,255,255,0.4); border-radius:4px; }
+        .p-template-card.ai-dark .t-line3 { width:80%; height:3px; background:rgba(0,255,255,0.15); border-radius:4px; }
+
+        .p-template-card.classic { background: #ffffff10; }
+        .p-template-card.classic .t-preview {
+            background: white; height: 80px; border-radius: 6px; margin-bottom: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+        }
+        .p-template-card.classic .t-line1 { width:60%; height:8px; background:#333; border-radius:4px; }
+        .p-template-card.classic .t-line2 { width:40%; height:5px; background:#999; border-radius:4px; }
+        .p-template-card.classic .t-line3 { width:80%; height:3px; background:#ddd; border-radius:4px; }
+
+        .p-template-card.blue-pro { background: rgba(0,100,255,0.05); }
+        .p-template-card.blue-pro .t-preview {
+            background: #0a1628; height: 80px; border-radius: 6px; margin-bottom: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            border-left: 3px solid #0066ff;
+        }
+        .p-template-card.blue-pro .t-line1 { width:60%; height:8px; background:#0066ff; border-radius:4px; }
+        .p-template-card.blue-pro .t-line2 { width:40%; height:5px; background:rgba(0,100,255,0.5); border-radius:4px; }
+        .p-template-card.blue-pro .t-line3 { width:80%; height:3px; background:rgba(0,100,255,0.2); border-radius:4px; }
+
+        .p-template-card.purple-neo { background: rgba(191,0,255,0.05); }
+        .p-template-card.purple-neo .t-preview {
+            background: #0d0014; border: 1px solid rgba(191,0,255,0.2);
+            height: 80px; border-radius: 6px; margin-bottom: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+        }
+        .p-template-card.purple-neo .t-line1 { width:60%; height:8px; background:#bf00ff; border-radius:4px; box-shadow:0 0 8px rgba(191,0,255,0.5); }
+        .p-template-card.purple-neo .t-line2 { width:40%; height:5px; background:rgba(191,0,255,0.4); border-radius:4px; }
+        .p-template-card.purple-neo .t-line3 { width:80%; height:3px; background:rgba(191,0,255,0.15); border-radius:4px; }
+
+        .p-template-card.custom { background: rgba(255,255,255,0.03); }
+        .p-template-card.custom .t-preview {
+            background: #111; border: 1px dashed rgba(255,255,255,0.2);
+            height: 80px; border-radius: 6px; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+
+        .template-name {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .template-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ── CUSTOM COLOR PICKER ── */
+        #p-customOptions {
+            display: none;
+            max-width: 750px;
+            margin: 20px auto 0;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        input[type="color"].form-input {
+            height: 48px;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        /* ── ACTION BUTTONS ── */
+        .portfolio-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .portfolio-actions button {
+            padding: 14px 28px;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s ease;
+            letter-spacing: 1px;
+            font-family: var(--font-heading);
+        }
+
+        #p-previewBtn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        #p-previewBtn:hover {
+            background: rgba(0,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        #p-downloadBtn {
+            background: var(--accent);
+            color: #0a0a14;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        #p-downloadBtn:hover {
+            background: white;
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .js-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 12px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .template-cards { grid-template-columns: 1fr 1fr; }
+            .portfolio-actions { flex-direction: column; align-items: center; }
+            #p-previewBtn, #p-downloadBtn { width: 100%; max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h2 id="logo">AI<span>Portfolio</span></h2>
+        <ul id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button id="hamburger" aria-label="Toggle menu">&#9776;</button>
+    </nav>
+
+    <!-- MINI HERO -->
+    <section id="home" style="min-height: 35vh; padding-top: 70px;">
+        <div class="hero-glow"></div>
+        <div class="grid-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-label">AI Powered</p>
+            <h1 id="mainHeading">Portfolio <span>Generator</span></h1>
+            <p id="subText">Fill your details, pick a template, generate your portfolio!</p>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO FORM -->
+    <section id="portfolio">
+        <div class="section-tag">Step 1</div>
+        <h2>Fill Your Details</h2>
+
+        <div class="portfolio-form">
+
+            <!-- Personal Info -->
+            <p class="form-section-title">👤 Personal Information</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name" id="p-name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="your@email.com" id="p-email">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="text" class="form-input" placeholder="+91 XXXXXXXXXX" id="p-phone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-input" placeholder="City, State" id="p-location">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">GitHub</label>
+                    <input type="text" class="form-input" placeholder="github.com/yourname" id="p-github">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">LinkedIn</label>
+                    <input type="text" class="form-input" placeholder="linkedin.com/in/yourname" id="p-linkedin">
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- About -->
+            <p class="form-section-title">💡 About You</p>
+            <div class="form-group">
+                <label class="form-label">Bio / About</label>
+                <textarea class="form-input" placeholder="Write 2-3 lines about yourself, your interests and goals..." id="p-bio"></textarea>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- Education -->
+            <p class="form-section-title">🎓 Education</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Degree</label>
+                    <input type="text" class="form-input" placeholder="e.g. B.Tech CSE AI/ML" id="p-degree">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">College</label>
+                    <input type="text" class="form-input" placeholder="College name" id="p-college">
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- Skills -->
+            <p class="form-section-title">⚡ Skills</p>
+            <div class="form-group">
+                <label class="form-label">Skills (comma separated)</label>
+                <input type="text" class="form-input" placeholder="HTML, CSS, Python, ML, React..." id="p-skills">
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- Projects -->
+            <p class="form-section-title">🚀 Projects</p>
+            <div class="form-group">
+                <label class="form-label">Project 1 Name</label>
+                <input type="text" class="form-input" placeholder="Project name" id="p-p1name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Project 1 Description</label>
+                <textarea class="form-input" placeholder="Brief description of what you built..." id="p-p1desc"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Project 2 Name</label>
+                <input type="text" class="form-input" placeholder="Project name" id="p-p2name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Project 2 Description</label>
+                <textarea class="form-input" placeholder="Brief description of what you built..." id="p-p2desc"></textarea>
+            </div>
+
+        </div>
+
+        <!-- TEMPLATE SELECTOR -->
+        <div style="margin-top: 50px;">
+            <div class="section-tag">Step 2</div>
+            <h2 style="margin-bottom: 30px;">Choose Your Template</h2>
+
+            <div class="template-section">
+                <div class="template-cards">
+
+                    <div class="p-template-card ai-dark selected" onclick="selectPortfolioTemplate('ai-dark', this)">
+                        <div class="t-preview">
+                            <div class="t-line1"></div>
+                            <div class="t-line2"></div>
+                            <div class="t-line3"></div>
+                        </div>
+                        <p class="template-name">AI Dark</p>
+                        <p class="template-desc">Futuristic, tech jobs</p>
+                    </div>
+
+                    <div class="p-template-card classic" onclick="selectPortfolioTemplate('classic', this)">
+                        <div class="t-preview">
+                            <div class="t-line1"></div>
+                            <div class="t-line2"></div>
+                            <div class="t-line3"></div>
+                        </div>
+                        <p class="template-name">Classic</p>
+                        <p class="template-desc">Clean white, job ready</p>
+                    </div>
+
+                    <div class="p-template-card blue-pro" onclick="selectPortfolioTemplate('blue-pro', this)">
+                        <div class="t-preview">
+                            <div class="t-line1"></div>
+                            <div class="t-line2"></div>
+                            <div class="t-line3"></div>
+                        </div>
+                        <p class="template-name">Blue Pro</p>
+                        <p class="template-desc">Corporate, professional</p>
+                    </div>
+
+                    <div class="p-template-card purple-neo" onclick="selectPortfolioTemplate('purple-neo', this)">
+                        <div class="t-preview">
+                            <div class="t-line1"></div>
+                            <div class="t-line2"></div>
+                            <div class="t-line3"></div>
+                        </div>
+                        <p class="template-name">Purple Neo</p>
+                        <p class="template-desc">Bold, creative, standout</p>
+                    </div>
+
+                    <div class="p-template-card custom" onclick="selectPortfolioTemplate('custom', this)">
+                        <div class="t-preview">🎨</div>
+                        <p class="template-name">Custom</p>
+                        <p class="template-desc">Pick your own colors</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Custom Color Picker (hidden until Custom selected) -->
+            <div id="p-customOptions">
+                <p class="form-section-title" style="margin-bottom:16px;">🎨 Choose Your Colors</p>
+                <div class="form-row" style="max-width:600px;">
+                    <div class="form-group">
+                        <label class="form-label">Background Color</label>
+                        <input type="color" id="p-custom-bg" value="#0a0a14" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Accent Color</label>
+                        <input type="color" id="p-custom-accent" value="#00ffff" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Text Color</label>
+                        <input type="color" id="p-custom-text" value="#e8eaf6" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GENERATE BUTTONS -->
+        <div style="margin-top: 40px;">
+            <div class="section-tag">Step 3</div>
+            <h2 style="margin-bottom: 20px;">Generate Portfolio</h2>
+
+            <div class="portfolio-actions">
+                <button id="p-previewBtn">👁️ Preview Portfolio</button>
+                <button id="p-downloadBtn">📥 Download PDF</button>
+            </div>
+            <p class="js-note">Portfolio will open in a new tab!</p>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>AI Team Portfolio</span> | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>
